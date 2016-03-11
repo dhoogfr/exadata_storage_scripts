@@ -9,11 +9,11 @@
 
 cellcli -e "list celldisk attributes freespace where disktype='HardDisk' and status='normal'" | awk \
 '
-BEGIN { 
+BEGIN {
   gd_count=0
-} { 
+} {
   gd_unit=substr($1, length($1), 1)
-  if (gd_unit == "T") { 
+  if (gd_unit == "T") {
     gd_size_mb=$1*1024*1024
   }
   else if (gd_unit == "G") {
@@ -26,12 +26,12 @@ BEGIN {
     print "unit size " gd_unit " not recognized"
     exit 1
   }
-  if (gd_min_size>=gd_size_mb || gd_min_size == "") { 
+  if (gd_min_size>=gd_size_mb || gd_min_size == "") {
     gd_min_size=gd_size_mb
   }
   gd_count++
-} 
-END { 
-  printf "%5.0f\n", gd_min_size * gd_count
+}
+END {
+  printf "%14.0f %6.0f %14.0f\n", gd_min_size * gd_count, gd_count, gd_min_size
 }
 '
