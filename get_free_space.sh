@@ -6,7 +6,7 @@
 ### and requires that the get_free_space_per_cell.sh is in the same directory as this script
 
 
-dcli -g cell_group -l root -x get_free_space_per_cell.sh | awk \
+dcli -g cell_group -l root -x get_celldisk_free_space.sh | awk \
 '
 BEGIN {
   gd_total_size=0
